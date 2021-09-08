@@ -64,6 +64,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.prev = self.ui.textEdit.keyPressEvent
 
         self.ui.textEdit.keyPressEvent = self.handleKeyPress
+        self.ui.textEdit.textChanged.connect(self.saveFile)
 
         self.downloadFile()
     
