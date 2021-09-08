@@ -29,8 +29,26 @@ last_index = 0
 
 css = '''
 body {
+    font-size: 1rem;
+    line-height: 1.5;
+    background: rgb(25, 25, 25);
+    color: #fff;
     font-family: Arial, Helvetica, sans-serif;
 }
+code, tt {
+    background: rgb(20, 20, 20);
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+#title { margin-bottom: 0rem; }
+#sub { margin-bottom: 0.5rem; margin-top: 8px; }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
 li{ margin-top: 8px; }
 '''
 
@@ -130,7 +148,7 @@ class MainWindow(QtWidgets.QMainWindow):
             title = node_text(x.find('title')).decode().replace('<title>', '').replace('</title>', '')
             date = node_text(x.find('date')).decode().replace('<date>', '').replace('</date>', '')
             category = node_text(x.find('category')).decode().replace('<category>', '').replace('</category>', '')
-            self.ui.textBrowser.setHtml(f'<style>{css}</style><h1>{title}</h1><h3>Published on {date} {"| Category: " + category if category else ""}</h3><hr>' + html)
+            self.ui.textBrowser.setHtml(f'<style>{css}</style><h3 id="title">{title}</h3><h5 id="sub">Published on {date} {"| Category: " + category if category else ""}</h5><hr>' + html)
         except Exception as e:
             self.ui.textBrowser.setHtml("<b>Invalid XML</b><pre>" + str(e) + "</pre>")
 
@@ -197,6 +215,22 @@ if __name__ == '__main__':
     last_index = len(files)
 
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle("Fusion")
+    palette = QPalette()
+    palette.setColor(QPalette.Window, QColor(53, 53, 53))
+    palette.setColor(QPalette.WindowText, Qt.white)
+    palette.setColor(QPalette.Base, QColor(25, 25, 25))
+    palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+    palette.setColor(QPalette.ToolTipBase, Qt.black)
+    palette.setColor(QPalette.ToolTipText, Qt.white)
+    palette.setColor(QPalette.Text, Qt.white)
+    palette.setColor(QPalette.Button, QColor(53, 53, 53))
+    palette.setColor(QPalette.ButtonText, Qt.white)
+    palette.setColor(QPalette.BrightText, Qt.red)
+    palette.setColor(QPalette.Link, QColor(42, 130, 218))
+    palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
+    palette.setColor(QPalette.HighlightedText, Qt.black)
+    app.setPalette(palette)
     w = MainWindow()
     w.show()
     sys.exit(app.exec_())
