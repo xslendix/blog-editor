@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
         self.splitter.setObjectName("splitter")
         self.textEdit = QtWidgets.QTextEdit(self.splitter)
         self.textEdit.setObjectName("textEdit")
-        self.textBrowser = QtWidgets.QTextBrowser(self.splitter)
+        self.textBrowser = QtWebEngineWidgets.QWebEngineView(self.splitter)
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout_2.addWidget(self.splitter)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -93,3 +93,4 @@ class Ui_MainWindow(object):
         self.actionLoad.setShortcut(_translate("MainWindow", "Ctrl+O"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
         self.actionQuit.setShortcut(_translate("MainWindow", "Alt+Q"))
+from PyQt5 import QtWebEngineWidgets

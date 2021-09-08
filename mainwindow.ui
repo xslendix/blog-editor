@@ -21,7 +21,7 @@
        <enum>Qt::Vertical</enum>
       </property>
       <widget class="QTextEdit" name="textEdit"/>
-      <widget class="QTextBrowser" name="textBrowser"/>
+      <widget class="QWebEngineView" name="textBrowser"/>
      </widget>
     </item>
    </layout>

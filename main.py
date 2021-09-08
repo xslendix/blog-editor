@@ -27,6 +27,13 @@ files = []
 
 last_index = 0
 
+css = '''
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+li{ margin-top: 8px; }
+'''
+
 def node_text(n):
     try:
         return etree.tostring(n, method='html', with_tail=False)
@@ -55,6 +62,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionQuit.triggered.connect(self.close)
 
         self.prev = self.ui.textEdit.keyPressEvent
+
         self.ui.textEdit.keyPressEvent = self.handleKeyPress
 
         self.downloadFile()
@@ -115,14 +123,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.updatePreview()
 
     def updatePreview(self):
-        self.ui.textBrowser.setOpenExternalLinks(True)
         try: 
             x = etree.parse(StringIO(self.ui.textEdit.toPlainText()))
-            html = node_text(x.find('html')).decode()
+            html = node_text(x.find('html')).decode().replace('<html>', '').replace('</html>', '')
             title = node_text(x.find('title')).decode().replace('<title>', '').replace('</title>', '')
             date = node_text(x.find('date')).decode().replace('<date>', '').replace('</date>', '')
             category = node_text(x.find('category')).decode().replace('<category>', '').replace('</category>', '')
-            self.ui.textBrowser.setHtml(f'<h1>{title}</h1><h3>Published on {date} {"| Category: " + category if category else ""}</h3><hr>' + html)
+            self.ui.textBrowser.setHtml(f'<style>{css}</style><h1>{title}</h1><h3>Published on {date} {"| Category: " + category if category else ""}</h3><hr>' + html)
         except Exception as e:
             self.ui.textBrowser.setHtml("<b>Invalid XML</b><pre>" + str(e) + "</pre>")
 
