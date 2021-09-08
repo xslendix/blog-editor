@@ -41,6 +41,9 @@ code, tt {
     padding-left: 4px;
     padding-right: 4px;
 }
+a {
+    color: #3391ff;
+}
 #title { margin-bottom: 0rem; }
 #sub { margin-bottom: 0.5rem; margin-top: 8px; }
 h1 { font-size: 2.5rem; }
